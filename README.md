@@ -1,6 +1,7 @@
 # ¿Existen traumas en las moscas? — Tratado y Ensayo Interactivo Next.js + React
 
 **Escrito por Duglas Altamar Gómez**  
+**Coautores:** Gemini 3.8 Flash y Claude Opus 5.5  
 *Reflexión filosófica y neurobiológica + 4 experimentos interactivos*
 
 Bienvenido a la documentación oficial del tratado interactivo **¿Existen traumas en las moscas?**, un ensayo de divulgación neurobiológica y reflexión humana construido con **Next.js 14**, **React 18** y la filosofía de diseño e ingeniería de microinteracciones de **Emil Kowalski**.

@@ -18,6 +18,7 @@ import { ScientificTooltip } from '../components/ui/ScientificTooltip';
  * Ensayo narrativo e interactivo: "¿Existen traumas en las moscas?"
  * Una reflexión sobre el egocentrismo humano, la empatía radical y la comunicación abierta.
  * Escrito por Duglas Altamar Gómez.
+ * Coautores: Gemini 3.8 Flash y Claude Opus 5.5.
  * Principios SOLID, arquitectura por capítulos, microinteracciones y estilo libro clásico.
  */
 export default function Home() {
