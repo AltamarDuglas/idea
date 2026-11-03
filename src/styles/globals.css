@@ -1,0 +1,1312 @@
+/* ==========================================================================
+   ESTILOS GLOBALES — TEMÁTICA ESTILO LIBRO (MOBILE-FIRST ARCHITECTURE)
+   Diseñado meticulosamente para pantallas móviles primero (320px+)
+   y escalable a tabletas y escritorios con estética de tomo encuadernado.
+   Integración con la filosofía de microinteracción y animación de Emil Kowalski.
+   ========================================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100vw;
+  background-color: var(--bg-page);
+}
+
+body.book-edition {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  font-family: var(--font-serif);
+  line-height: 1.8;
+  overflow-x: hidden;
+  max-width: 100vw;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--duration-normal) var(--ease-out), color var(--duration-normal) var(--ease-out);
+}
+
+/* --------------------------------------------------------------------------
+   1. CINTA MARCAPÁGINAS Y CABECERA DEL LIBRO (MOBILE-FIRST)
+   -------------------------------------------------------------------------- */
+.progress-track {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--border-subtle);
+  z-index: 1000;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 100%;
+  background: var(--accent-amber);
+  transform-origin: left center;
+  transition: transform 80ms linear;
+}
+
+/* Cinta marcapáginas decorativa en la esquina */
+.ribbon-bookmark {
+  position: fixed;
+  top: 0;
+  right: 20px;
+  width: 16px;
+  height: 38px;
+  background: var(--book-ribbon);
+  z-index: 950;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%);
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.top-navbar {
+  position: fixed;
+  top: 3px;
+  left: 0;
+  width: 100%;
+  z-index: 900;
+  background: var(--bg-glass);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.navbar-inner {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.brand-cluster {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 1;
+}
+
+.brand-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-amber-soft);
+  border: 1px solid var(--accent-amber-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--accent-amber);
+}
+
+.chapter-meta {
+  min-width: 0;
+  flex: 1;
+}
+
+.chapter-kicker {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-amber);
+  display: block;
+  line-height: 1.1;
+}
+
+.chapter-current {
+  font-family: var(--font-serif);
+  font-size: 12px;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   2. BOTONES Y ACCIONES TÁCTILES (MÍNIMO 44PX EN MÓVIL)
+   -------------------------------------------------------------------------- */
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  min-height: 36px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 600;
+  background: var(--accent-amber-soft);
+  color: var(--accent-amber);
+  border: 1px solid var(--accent-amber-border);
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out), background-color var(--duration-fast) var(--ease-out);
+}
+
+.btn-pill:active {
+  transform: scale(0.97);
+}
+
+.btn-icon-only {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-icon-only:hover {
+    border-color: var(--accent-amber);
+    color: var(--accent-amber);
+  }
+}
+
+.btn-icon-only:active {
+  transform: scale(0.97);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-amber);
+  display: inline-block;
+}
+
+/* --------------------------------------------------------------------------
+   3. CUERPO DEL LIBRO / PÁGINA (MOBILE-FIRST)
+   -------------------------------------------------------------------------- */
+.main-container {
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 72px 14px 90px 14px;
+}
+
+@media (min-width: 680px) {
+  .main-container {
+    padding: 96px 28px 120px 28px;
+  }
+}
+
+/* Hoja / Pliego de libro con sombra sutil de lomo */
+.book-page-folio {
+  background: var(--bg-book);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 24px 16px;
+  box-shadow: var(--book-page-shadow);
+  margin-bottom: 28px;
+}
+
+@media (min-width: 680px) {
+  .book-page-folio {
+    padding: 38px 36px;
+    margin-bottom: 36px;
+  }
+}
+
+/* Letra Capitular (Drop Cap) */
+.drop-cap {
+  float: left;
+  font-family: var(--font-serif);
+  font-size: 3.4rem;
+  line-height: 0.82;
+  margin: 4px 10px 0 0;
+  color: var(--accent-amber);
+  font-weight: 700;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Frontispicio / Portada */
+.book-frontispiece {
+  text-align: center;
+  padding: 20px 8px 30px 8px;
+  border-bottom: 1px double var(--border-subtle);
+  margin-bottom: 28px;
+}
+
+/* Entrada del frontispicio: CSS puro, corre fuera del hilo principal durante la hidratación */
+.hero-enter {
+  animation: hero-enter 500ms var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+
+@keyframes hero-enter {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Flecha de scroll: 3 latidos y se detiene; ease-in-out porque es movimiento en pantalla */
+.scroll-hint-arrow {
+  animation: scroll-hint 1.6s var(--ease-in-out) 3;
+}
+
+@keyframes scroll-hint {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--accent-amber);
+  margin-bottom: 16px;
+  letter-spacing: 0.08em;
+}
+
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 7vw, 3.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.hero-subtitle {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.05rem, 3.5vw, 1.35rem);
+  line-height: 1.55;
+  color: var(--text-secondary);
+  max-width: 620px;
+  margin: 0 auto 24px auto;
+}
+
+.book-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--accent-amber);
+  font-size: 14px;
+  margin: 18px 0;
+}
+
+.book-ornament::before,
+.book-ornament::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+.author-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  margin: 24px 0 32px 0;
+}
+
+@media (min-width: 580px) {
+  .author-card {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.author-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.author-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent-amber-soft);
+  border: 1px solid var(--accent-amber-border);
+  color: var(--accent-amber);
+  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.author-scroll-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  color: var(--accent-amber);
+  font-weight: 600;
+}
+
+.prose-section {
+  font-size: 1.02rem;
+  line-height: 1.85;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+}
+
+.prose-section p {
+  margin-bottom: 16px;
+  text-align: justify;
+}
+
+.pull-quote {
+  border-left: 3px solid var(--accent-amber);
+  padding: 12px 16px;
+  margin: 22px 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  background: var(--accent-amber-soft);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  color: var(--text-primary);
+}
+
+.chapter-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 44px 0 14px 0;
+}
+
+.chapter-number {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--accent-amber);
+  font-weight: 700;
+}
+
+.chapter-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+.section-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(1.45rem, 5vw, 2.1rem);
+  line-height: 1.3;
+  color: var(--text-primary);
+  margin-bottom: 18px;
+  font-weight: 700;
+}
+
+.citation-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--accent-amber);
+  background: var(--accent-amber-soft);
+  border: 1px solid var(--accent-amber-border);
+  padding: 1px 5px;
+  border-radius: 3px;
+  vertical-align: middle;
+}
+
+/* --------------------------------------------------------------------------
+   4. LÁMINAS CIENTÍFICAS ILUSTRADAS (BOOK PLATES / EXPERIMENTS)
+   -------------------------------------------------------------------------- */
+.experiment-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin: 26px 0 36px 0;
+  box-shadow: var(--card-lift);
+}
+
+.exp-header {
+  padding: 14px 16px;
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+@media (min-width: 600px) {
+  .exp-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+  }
+}
+
+.exp-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.exp-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent-amber);
+  background: var(--accent-amber-soft);
+  border: 1px solid var(--accent-amber-border);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.05em;
+}
+
+.exp-title {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.ux-step-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: var(--text-secondary);
+}
+
+.ux-step-badge.completed {
+  color: var(--accent-emerald);
+  border-color: var(--accent-emerald);
+  background: var(--accent-emerald-soft);
+}
+
+.pulse-beacon {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-amber);
+}
+
+/* El pulso solo se activa cuando hay un proceso vivo en el laboratorio */
+.ux-step-badge.is-live .pulse-beacon {
+  animation: pulse-beacon 1.8s ease-in-out infinite;
+}
+
+@keyframes pulse-beacon {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.6; }
+}
+
+.exp-body {
+  padding: 16px 14px;
+}
+
+@media (min-width: 680px) {
+  .exp-body {
+    padding: 22px 20px;
+  }
+}
+
+/* Controles Mobile-First */
+.controls-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+@media (min-width: 600px) {
+  .controls-grid-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.control-box {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+@media (min-width: 600px) {
+  .control-box {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.control-label-kicker {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-amber);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.control-label-main {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: block;
+}
+
+.btn-action {
+  padding: 9px 14px;
+  min-height: 42px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out), background-color var(--duration-fast) var(--ease-out);
+  white-space: nowrap;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-action:hover {
+    border-color: var(--accent-amber);
+  }
+}
+
+.btn-action:active {
+  transform: scale(0.97);
+}
+
+.btn-action.primary {
+  background: var(--accent-amber);
+  color: #141210;
+  border-color: var(--accent-amber);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-action.primary:hover {
+    background: var(--accent-amber-hover);
+    border-color: var(--accent-amber-hover);
+  }
+}
+
+.btn-action.active-toggle {
+  background: var(--accent-amber-soft);
+  color: var(--accent-amber);
+  border-color: var(--accent-amber-border);
+}
+
+/* Telemetría */
+.telemetry-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+@media (min-width: 600px) {
+  .telemetry-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.telemetry-pill {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+}
+
+.telemetry-pill span {
+  color: var(--text-muted);
+}
+
+.readout-box {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--accent-amber);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-top: 14px;
+}
+
+.readout-box strong {
+  color: var(--text-primary);
+}
+
+/* Sliders */
+.slider-wrapper {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+.slider-header {
+  margin-bottom: 10px;
+}
+
+.slider-endpoints {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.lab-slider {
+  width: 100%;
+  height: 8px;
+  background: var(--border-subtle);
+  border-radius: 999px;
+  outline: none;
+  cursor: pointer;
+  accent-color: var(--accent-amber);
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.lab-slider:active {
+  transform: scaleY(1.3);
+}
+
+/* Protocol Grid Mobile First */
+.protocol-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+@media (min-width: 680px) {
+  .protocol-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.protocol-tab {
+  position: relative;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  min-height: 48px;
+  cursor: pointer;
+  text-align: left;
+  transition: transform var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+  overflow: hidden;
+}
+
+.protocol-tab:active {
+  transform: scale(0.97);
+}
+
+.protocol-kicker {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: block;
+}
+
+.protocol-name {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-serif);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: block;
+}
+
+.active-tab-indicator {
+  position: absolute;
+  inset: 0;
+  background: var(--accent-amber-soft);
+  border: 1px solid var(--accent-amber);
+  border-radius: var(--radius-sm);
+  z-index: 1;
+}
+
+.arena-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+@media (min-width: 680px) {
+  .arena-split {
+    grid-template-columns: 7fr 5fr;
+  }
+}
+
+/* Métricas */
+.metric-bar-group {
+  margin-bottom: 10px;
+}
+
+.metric-bar-header {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  margin-bottom: 4px;
+  color: var(--text-secondary);
+}
+
+.metric-track {
+  width: 100%;
+  height: 7px;
+  background: var(--bg-elevated);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+}
+
+.metric-fill {
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  transform-origin: left center;
+  transition: transform 300ms var(--ease-out);
+}
+
+/* Marco de Lámina de Dibujo / Canvas Frame */
+.canvas-frame {
+  width: 100%;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: #100E0C;
+  border: 1px solid var(--border-subtle);
+  position: relative;
+}
+
+html.light-theme .canvas-frame {
+  background: #F5EFE6;
+}
+
+/* --------------------------------------------------------------------------
+   5. ESCOLIO Y NOTAS AL MARGEN (BLUEPRINT NOTES)
+   -------------------------------------------------------------------------- */
+.blueprint-note {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px dashed var(--accent-amber-border);
+  background: rgba(245, 158, 11, 0.04);
+}
+
+.blueprint-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent-amber);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.blueprint-text {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  font-style: italic;
+}
+
+/* --------------------------------------------------------------------------
+   6. ÍNDICE BIBLIOGRÁFICO
+   -------------------------------------------------------------------------- */
+.biblio-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+@media (min-width: 600px) {
+  .biblio-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.biblio-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  transition: transform var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .biblio-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--border-focus);
+  }
+}
+
+.biblio-year {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--accent-amber);
+  margin-bottom: 4px;
+  display: block;
+}
+
+.biblio-title {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.biblio-desc {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+/* --------------------------------------------------------------------------
+   6b. EXPERIMENTO 01 — DIORAMA ISOMÉTRICO DEL BOSQUE
+   -------------------------------------------------------------------------- */
+.forest-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+@media (min-width: 680px) {
+  .forest-controls {
+    flex-direction: row;
+    align-items: stretch;
+  }
+}
+
+.forest-scenes {
+  flex: 1;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.forest-scenes .protocol-tab {
+  min-height: 52px;
+  padding: 10px 14px 14px;
+}
+
+.forest-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.scene-progress {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 6px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--border-subtle);
+  overflow: hidden;
+  z-index: 2;
+}
+
+.scene-progress > span {
+  display: block;
+  height: 100%;
+  background: var(--accent-amber);
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+.forest-stage {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  background: radial-gradient(ellipse at 50% 35%, var(--bg-elevated), var(--bg-page));
+  overflow: hidden;
+}
+
+.forest-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.forest-title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 17px;
+  fill: var(--text-primary);
+}
+
+.forest-tuft { stroke: #7FA552; stroke-width: 1.2; stroke-linecap: round; fill: none; opacity: 0.55; }
+.forest-patch { fill: #8DB35E; opacity: 0.09; }
+.forest-strata { stroke: #000; stroke-width: 1; opacity: 0.18; }
+.forest-cast { fill: #0B1206; opacity: 0.34; }
+.forest-contact { fill: #000; opacity: 0.35; }
+.forest-slab-shadow { fill: #000; opacity: 0.5; }
+.forest-puff { fill: #D6C7A8; }
+.forest-ring-glow { fill: none; stroke: var(--accent-cyan); stroke-width: 7; }
+
+.forest-ring {
+  fill: none;
+  stroke: var(--accent-cyan);
+  stroke-width: 2;
+  stroke-dasharray: 6 5;
+}
+
+.forest-presence {
+  transition: opacity 260ms var(--ease-out), transform 260ms var(--ease-out);
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+
+.forest-presence[data-hidden='true'] {
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
+}
+
+.forest-empty-spot {
+  fill: none;
+  stroke: var(--text-muted);
+  stroke-width: 1.2;
+  stroke-dasharray: 3 4;
+}
+
+.forest-note,
+.forest-legend text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 12px;
+  fill: var(--text-muted);
+}
+
+.forest-silence {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 14px;
+  fill: var(--accent-cyan);
+  animation: forest-pop 500ms var(--ease-out) both;
+}
+
+.person-limb { stroke: #D6CFC2; stroke-width: 5.5; stroke-linecap: round; }
+.person-body { stroke: #8E6E52; stroke-width: 16; stroke-linecap: round; }
+
+.person-head {
+  fill: #E9DFCF;
+  stroke: #8E6E52;
+  stroke-width: 1.5;
+  transition: fill 200ms var(--ease-out), stroke 200ms var(--ease-out);
+}
+
+.person-head[data-on='true'] { fill: #FCD34D; stroke: var(--accent-amber); }
+
+.person-ear { fill: none; stroke: #8E6E52; stroke-width: 1.6; stroke-linecap: round; }
+.person-ear[data-on='true'] { stroke: var(--accent-amber); }
+
+.person-glow {
+  opacity: 0;
+  transition: opacity 300ms var(--ease-out);
+}
+
+.person-glow[data-on='true'] { opacity: 1; }
+
+.sound-mark {
+  fill: none;
+  stroke: var(--accent-amber);
+  stroke-width: 2;
+  stroke-linecap: round;
+  animation: forest-pop 450ms var(--ease-out) both;
+}
+
+.pum-label {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 16px;
+  fill: var(--accent-amber);
+  animation: forest-pop 500ms var(--ease-out) both;
+}
+
+.legend-sound { fill: var(--accent-amber); }
+
+@keyframes forest-pop {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.forest-caption {
+  margin-top: 12px;
+  min-height: 3.4em;
+  font-family: var(--font-serif);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+/* Experimento 02 — la mano y la mosca (mismo diorama, prefijo umwelt-) */
+.umwelt-plank { stroke: #000; stroke-width: 1; opacity: 0.16; }
+
+.umwelt-path {
+  fill: none;
+  stroke: var(--accent-cyan);
+  stroke-width: 1.6;
+  stroke-dasharray: 5 5;
+  opacity: 0.45;
+  transition: opacity 200ms var(--ease-out);
+}
+
+.umwelt-path[data-active='true'] { opacity: 0.95; }
+.umwelt-path-shadow { fill: none; stroke: #000; stroke-width: 1.4; stroke-dasharray: 4 6; opacity: 0.25; }
+
+.umwelt-ghost {
+  fill: var(--accent-amber);
+  fill-opacity: 0.07;
+  stroke: var(--accent-amber);
+  stroke-width: 1.1;
+  stroke-linejoin: round;
+}
+
+.umwelt-eye { fill: #B91C1C; }
+.umwelt-wing { fill: #E3EEF7; stroke: #AFC4D6; stroke-width: 0.6; }
+
+.umwelt-escape {
+  fill: none;
+  stroke: var(--accent-amber);
+  stroke-width: 1.6;
+  stroke-dasharray: 3 4;
+  animation: forest-pop 450ms var(--ease-out) both;
+}
+
+.umwelt-slow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  fill: var(--accent-amber);
+  animation: forest-pop 450ms var(--ease-out) both;
+}
+
+.umwelt-counter {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: var(--accent-amber);
+}
+
+.umwelt-hex-cell { fill: none; stroke: var(--accent-amber); stroke-width: 0.7; }
+
+.umwelt-hex {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 400ms var(--ease-out);
+}
+
+.umwelt-hex[data-on='true'] { opacity: 0.08; }
+
+/* Experimento 03 — la arena de cristal (prefijo arena-) */
+.arena-floor { fill: #DCE6EE; opacity: 0.06; }
+.arena-grid { stroke: #DCE6EE; stroke-width: 0.8; opacity: 0.12; }
+
+.arena-glass {
+  fill: #BFE3F2;
+  fill-opacity: 0.1;
+  stroke: #CFEAF5;
+  stroke-opacity: 0.35;
+  stroke-width: 1;
+}
+
+.arena-glass.is-front { fill-opacity: 0.07; stroke-opacity: 0.45; }
+.arena-rim { fill: none; stroke: #E6F4FA; stroke-opacity: 0.55; stroke-width: 1.2; }
+
+.arena-door-frame {
+  fill: #0B1206;
+  fill-opacity: 0.35;
+  stroke: var(--text-muted);
+  stroke-width: 1;
+  transition: stroke 200ms var(--ease-out);
+}
+
+.arena-door-frame[data-open='true'] { stroke: var(--accent-cyan); stroke-width: 1.6; }
+.arena-shadow-band { fill: #000; opacity: 0.55; }
+.arena-shadow-edge { stroke: var(--accent-cyan); stroke-width: 1.8; stroke-dasharray: 6 5; }
+
+.arena-trail {
+  fill: none;
+  stroke: var(--accent-amber);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  opacity: 0.55;
+}
+
+.arena-alarm { fill: none; stroke: var(--accent-amber); stroke-width: 1.4; }
+
+.arena-intent {
+  fill: none;
+  stroke: var(--accent-amber);
+  stroke-width: 1.6;
+  stroke-dasharray: 3 4;
+  animation: forest-pop 450ms var(--ease-out) both;
+}
+
+.arena-intent.is-refused { stroke-dasharray: 2 6; opacity: 0.55; }
+
+.arena-scene { transition: filter 500ms var(--ease-out); }
+.arena-scene[data-past='true'] { filter: sepia(0.6) saturate(0.75) brightness(0.92); }
+
+.arena-phase {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  fill: var(--accent-cyan);
+}
+
+.arena-phase[data-past='true'] { fill: #D6B98C; }
+.arena-heat { fill: #EF4444; }
+
+.arena-heat-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  fill: #FCA5A5;
+}
+
+.arena-door-label {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 12px;
+  fill: var(--text-muted);
+}
+
+.arena-door-label[data-open='true'] { fill: var(--accent-cyan); font-weight: 700; }
+
+.arena-reject {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 14px;
+  fill: var(--accent-amber);
+}
+
+.arena-state { margin-top: 12px; flex-direction: column; align-items: stretch; }
+
+.arena-state-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+/* Experimento 04 — el espejo evolutivo (prefijo mirror-) */
+.forest-scenes.mirror-scenes { grid-template-columns: 1fr 1fr 1fr; }
+
+.mirror-tile {
+  fill: #DCE6EE;
+  fill-opacity: 0.05;
+  stroke: #DCE6EE;
+  stroke-opacity: 0.22;
+  stroke-width: 1;
+}
+
+.mirror-tile.is-cortex { stroke-dasharray: 4 4; }
+.mirror-tether { stroke: #DCE6EE; stroke-opacity: 0.25; stroke-width: 1; stroke-dasharray: 2 4; }
+
+.mirror-edge {
+  stroke: #78716C;
+  stroke-opacity: 0.45;
+  stroke-width: 1;
+  transition: stroke 200ms var(--ease-out), stroke-opacity 200ms var(--ease-out);
+}
+
+.mirror-edge.is-core { stroke-width: 2; }
+.mirror-edge[data-on='true'] { stroke: var(--accent-amber); stroke-opacity: 0.95; }
+
+.mirror-node {
+  fill: #57534E;
+  stroke: #A8A29E;
+  stroke-opacity: 0.4;
+  stroke-width: 1;
+  transition: fill 200ms var(--ease-out), stroke 200ms var(--ease-out);
+}
+
+.mirror-node.is-minor { fill: #44403C; }
+.mirror-node[data-on='true'] { fill: #FCD34D; stroke: var(--accent-amber); stroke-opacity: 1; }
+.mirror-pulse { fill: #FFF3C4; }
+
+.forest-caption .is-result { color: var(--text-primary); }
+.forest-caption .is-result[data-scene='person'] { color: var(--accent-amber); }
+
+/* --------------------------------------------------------------------------
+   7. ACCESIBILIDAD REDUCED MOTION
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

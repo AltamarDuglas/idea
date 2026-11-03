@@ -1,0 +1,114 @@
+/* ==========================================================================
+   SISTEMA DE TOKENS EDITORIAL — ESTILO LIBRO (MOBILE-FIRST)
+   Filosofía Emil Kowalski: Microinteracciones, curvas precisas y tipografía de libro.
+   Compatible con todas las referencias del proyecto (--bg-primary, --text-primary, etc.).
+   ========================================================================== */
+
+:root {
+  /* Curvas de aceleración precisas (Emil Kowalski) */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  --duration-fast: 140ms;
+  --duration-normal: 220ms;
+  --duration-slow: 360ms;
+
+  /* MODO OSCURO: Biblioteca Nocturna / Manuscrito Iluminado */
+  --bg-page: #0C0A09;
+  --bg-book: #141210;
+  --bg-primary: #0C0A09;
+  --bg-elevated: #181512;
+  --bg-card: #1E1A16;
+  --bg-glass: rgba(20, 18, 16, 0.92);
+  --bg-glass-subtle: rgba(30, 26, 22, 0.85);
+
+  /* Tintas Tipográficas */
+  --ink-primary: #F5F2EB;
+  --ink-secondary: #B8B2A6;
+  --ink-muted: #787267;
+  --text-primary: #F5F2EB;
+  --text-secondary: #B8B2A6;
+  --text-muted: #787267;
+
+  /* Pan de Oro & Acentos Históricos */
+  --accent-amber: #F59E0B;
+  --accent-amber-hover: #D97706;
+  --accent-amber-soft: rgba(245, 158, 11, 0.15);
+  --accent-amber-border: rgba(245, 158, 11, 0.4);
+
+  --accent-emerald: #10B981;
+  --accent-emerald-soft: rgba(16, 185, 129, 0.15);
+
+  --accent-crimson: #EF4444;
+  --accent-crimson-soft: rgba(239, 68, 68, 0.15);
+
+  --accent-violet: #A855F7;
+  --accent-violet-soft: rgba(168, 85, 247, 0.15);
+
+  --accent-cyan: #06B6D4;
+  --accent-cyan-soft: rgba(6, 182, 212, 0.15);
+
+  /* Bordes, Encuadernación y Cinta Marcapáginas */
+  --border-subtle: rgba(245, 158, 11, 0.18);
+  --border-focus: rgba(245, 158, 11, 0.45);
+  --book-ribbon: #B91C1C;
+  --book-spine: #241D17;
+
+  /* Relieve de Página y Sombra de Lomo */
+  --card-lift: inset 0 1px 0 0 rgba(245, 158, 11, 0.12), 0 2px 8px rgba(0, 0, 0, 0.4), 0 12px 28px -6px rgba(0, 0, 0, 0.6);
+  --book-page-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.7);
+
+  /* Fuentes Editoriales Clásicas */
+  --font-serif: 'Georgia', 'Garamond', 'Palatino', 'Times New Roman', serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+
+  --radius-lg: 10px;
+  --radius-md: 8px;
+  --radius-sm: 5px;
+}
+
+/* MODO CLARO: Papel Vergé Marfil / Tinta Nuez y Pan de Oro */
+html.light-theme,
+[data-theme="light"] {
+  --bg-page: #F2EDE4;
+  --bg-book: #FBF8F2;
+  --bg-primary: #F2EDE4;
+  --bg-elevated: #EAE3D6;
+  --bg-card: #FCFAF6;
+  --bg-glass: rgba(248, 243, 235, 0.94);
+  --bg-glass-subtle: rgba(252, 250, 246, 0.88);
+
+  --ink-primary: #1C1814;
+  --ink-secondary: #4A4237;
+  --ink-muted: #7A7061;
+  --text-primary: #1C1814;
+  --text-secondary: #4A4237;
+  --text-muted: #7A7061;
+
+  --accent-amber: #B45309;
+  --accent-amber-hover: #92400E;
+  --accent-amber-soft: rgba(180, 83, 9, 0.12);
+  --accent-amber-border: rgba(180, 83, 9, 0.35);
+
+  --accent-emerald: #15803D;
+  --accent-emerald-soft: rgba(21, 128, 61, 0.12);
+
+  --accent-crimson: #B91C1C;
+  --accent-crimson-soft: rgba(185, 28, 28, 0.12);
+
+  --accent-violet: #7E22CE;
+  --accent-violet-soft: rgba(126, 34, 206, 0.12);
+
+  --accent-cyan: #0E7490;
+  --accent-cyan-soft: rgba(14, 116, 144, 0.12);
+
+  --border-subtle: rgba(180, 83, 9, 0.18);
+  --border-focus: rgba(180, 83, 9, 0.45);
+  --book-ribbon: #991B1B;
+  --book-spine: #854D0E;
+
+  --card-lift: inset 0 1px 0 0 rgba(255, 255, 255, 1), 0 1px 3px rgba(60, 40, 20, 0.08), 0 10px 24px -4px rgba(60, 40, 20, 0.12);
+  --book-page-shadow: 0 4px 18px -2px rgba(60, 40, 20, 0.15);
+}
