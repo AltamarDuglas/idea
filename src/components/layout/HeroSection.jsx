@@ -33,12 +33,12 @@ export function HeroSection() {
         <div className="author-info">
           <div className="author-avatar" aria-hidden="true">§</div>
           <div>
-            {/* Autor principal y coautoría de modelos de IA */}
+            {/* Autor principal y editores (modelos de IA) */}
             <div style={{ fontWeight: 700, fontSize: '13.5px', color: 'var(--text-primary)', fontStyle: 'italic' }}>
               Escrito por Duglas Altamar Gómez
             </div>
             <div style={{ fontSize: '11.5px', color: 'var(--accent-amber)', fontStyle: 'italic', marginTop: '1px' }}>
-              Coautores: Gemini 3.8 Flash y Claude Opus 5.5
+              Editores: Gemini 3.8 Flash y Claude Opus 5.5
             </div>
             <div style={{ fontSize: '11px', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', marginTop: '2px' }}>
               Reflexión + 4 experimentos interactivos

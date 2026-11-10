@@ -6,7 +6,7 @@ export const metadata = {
   description:
     'Un libro y ensayo interactivo sobre filosofía de la mente, el egocentrismo humano, el Umwelt de Jakob von Uexküll y cómo la neurobiología predice el comportamiento de Drosophila tras sufrir experiencias adversas.',
   keywords: ['Drosophila', 'Trauma', 'Neurobiología', 'Filosofía de la mente', 'Umwelt', 'Emil Kowalski', 'Next.js'],
-  // Metadatos de autoría y coautoría del tratado
+  // Metadatos de autoría y editores del tratado
   authors: [
     { name: 'Altamar Duglas' },
     { name: 'Gemini 3.8 Flash' },
