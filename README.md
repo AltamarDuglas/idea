@@ -119,8 +119,11 @@ El proyecto sigue estrictamente las directrices codificadas en las skills `emil-
   - **Explicación Técnica Diferida:** Colocada al final para no sobrecargar la experiencia inmediata, explicando la distinción entre las ondas físicas de aire y la percepción subjetiva fabricada por el cerebro.
 
 ### Experimento 02: El Filtro del Umwelt
-- **Premisa:** Ilustrar cómo la frecuencia crítica de fusión de destellos (*Flicker Fusion Rate*) define la velocidad subjetiva del tiempo.
-- **Interacción:** Un control deslizante transiciona desde la visión foveal humana (60 Hz) hacia los ojos compuestos de Drosophila (250 Hz). A máxima frecuencia, el movimiento de la mano atacante se ralentiza más de 4 veces y se traza el vector de evasión en tiempo real.
+- **Premisa:** Ilustrar cómo la frecuencia crítica de fusión de destellos (*Flicker Fusion Rate*) define la velocidad subjetiva del tiempo y la percepción del movimiento.
+- **Interacción y Efectos Cinéticos:**
+  - **Ojos Humanos (~60 Hz) con Desenfoque de Movimiento (*Motion Blur*):** Debido al tiempo de integración retiniana humana, la mano en picado se visualiza con un desenfoque cinético dinámico direccional (`feGaussianBlur`) proporcional a la velocidad del manotazo, convirtiendo el ataque en un borrón violento y fugaz. Al detenerse el golpe sobre la mesa, la mano recupera inmediatamente su nitidez estática.
+  - **Ojos de Drosophila (hasta 250 Hz) en Cámara Lenta ×4:** La mosca procesa más de cuatro veces más imágenes por segundo, permitiéndole ver la misma mano completamente nítida, flotando a velocidad reducida, con tiempo de sobra para calcular su vector de escape.
+  - **Alternancia y Pausa:** Reproducción continua de ambas escenas para comparar el contraste entre la física objetiva y la vivencia subjetiva (*Umwelt*).
 
 ### Experimento 03: Arena de Predicción Conductual
 - **Premisa:** Validar que una experiencia traumática previa permite predecir matemáticamente la conducta futura del insecto.

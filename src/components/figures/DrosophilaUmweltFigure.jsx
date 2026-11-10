@@ -187,6 +187,7 @@ export function DrosophilaUmweltFigure() {
 
   const handRef = useRef(null);
   const handShadowRef = useRef(null);
+  const motionBlurRef = useRef(null); // Referencia al filtro de desenfoque cinético para la mano humana
   const flyRef = useRef(null);
   const flyShadowRef = useRef(null);
   const wingsRef = useRef(null);
@@ -231,6 +232,34 @@ export function DrosophilaUmweltFigure() {
     const [hsx, hsy] = screenOffset(hand[0] + hand[2] * SHADOW_DX, hand[1] + hand[2] * SHADOW_DY, 0);
     handShadowRef.current?.setAttribute('transform', `translate(${hsx.toFixed(1)} ${hsy.toFixed(1)})`);
 
+    // Desenfoque de movimiento (motion blur) inmersivo:
+    // - En ojos humanos (~60 Hz): el tiempo de integración retiniano funde la mano rápida en un borrón dinámico
+    //   proporcional a la velocidad del manotazo. Al detenerse sobre la mesa o antes de caer, recupera su nitidez.
+    // - En ojos de mosca (250 Hz): muestreo ultrarrápido (cámara lenta x4), la mano se percibe nítida en cada instante.
+    if (currentScene === 'human') {
+      if (backP !== null) {
+        // En reposicionamiento de retorno: leve desenfoque cinético suave
+        motionBlurRef.current?.setAttribute('stdDeviation', '2.5 3.0');
+        handRef.current?.setAttribute('filter', 'url(#umwelt-hand-motion-blur)');
+      } else if (tau > 0 && tau < ACT.swoop) {
+        // Descenso rápido en picado: desenfoque pronunciado a lo largo del vector de desplazamiento
+        const progress = tau / ACT.swoop;
+        const velocity = Math.sin(progress * Math.PI); // Velocidad máxima en el centro de la trayectoria
+        const blurX = (velocity * 9.0 + 2.0).toFixed(1);
+        const blurY = (velocity * 12.0 + 2.5).toFixed(1);
+        motionBlurRef.current?.setAttribute('stdDeviation', `${blurX} ${blurY}`);
+        handRef.current?.setAttribute('filter', 'url(#umwelt-hand-motion-blur)');
+      } else {
+        // Mano en reposo estático (arriba antes de iniciar o detenida sobre la mesa)
+        motionBlurRef.current?.setAttribute('stdDeviation', '0 0');
+        handRef.current?.removeAttribute('filter');
+      }
+    } else {
+      // Visión de mosca: cámara lenta x4 nítida sin desenfoque retiniano
+      motionBlurRef.current?.setAttribute('stdDeviation', '0 0');
+      handRef.current?.removeAttribute('filter');
+    }
+
     // Mosca
     let fly;
     let flying = false;
@@ -270,6 +299,12 @@ export function DrosophilaUmweltFigure() {
       el.setAttribute('transform', `translate(${gx.toFixed(1)} ${gy.toFixed(1)})`);
       const age = (tau - ti) * sc.slow; // edad en tiempo de pantalla
       el.setAttribute('opacity', (0.85 * Math.max(0.35, 1 - age / 1600)).toFixed(2));
+      // En visión humana, las siluetas fantasma también se perciben como borrones desenfocados
+      if (currentScene === 'human') {
+        el.setAttribute('filter', 'url(#umwelt-ghost-blur)');
+      } else {
+        el.removeAttribute('filter');
+      }
     }
     if (counterRef.current) counterRef.current.textContent = `imágenes captadas: ${captured}`;
 
@@ -441,6 +476,14 @@ export function DrosophilaUmweltFigure() {
             <defs>
               <filter id="umwelt-soft" x="-30%" y="-30%" width="160%" height="160%">
                 <feGaussianBlur stdDeviation="2.4" />
+              </filter>
+              {/* Filtro de desenfoque de movimiento cinético dinámico para la mano en visión humana (~60 Hz) */}
+              <filter id="umwelt-hand-motion-blur" x="-60%" y="-60%" width="220%" height="220%">
+                <feGaussianBlur ref={motionBlurRef} stdDeviation="0 0" />
+              </filter>
+              {/* Filtro de persistencia retiniana y borrón para las siluetas fantasma captadas por el ojo humano */}
+              <filter id="umwelt-ghost-blur" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="4.5 5.5" />
               </filter>
               <filter id="umwelt-blur-strong" x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur stdDeviation="5" />
